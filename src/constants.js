@@ -1,3 +1,3 @@
-const DB_Name = "Cluster0";
+const DB_Name = "placement_cell";
 
 export { DB_Name };
