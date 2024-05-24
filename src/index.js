@@ -1,17 +1,18 @@
 import "dotenv/config";
-import express from "express";
+import { app } from "./app.js";
+import { connectDB } from "./config/mongoose.js";
 
-const app = express();
 const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("Heyy I am working");
-});
-
-app.listen(port, (err) => {
-  if (err) {
-    console.log("error", err);
-    return;
-  }
-  console.log(`server is running on port: ${port}`);
-});
+connectDB()
+  .then(() => {
+    app.on("error", (err) => {
+      console.log("error", err);
+    });
+    app.listen(port, () => {
+      console.log(`server is running on port: ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(`Mongo DB connection failure: ${err}`);
+  });
