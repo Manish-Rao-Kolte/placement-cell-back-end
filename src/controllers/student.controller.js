@@ -1,13 +1,14 @@
+import { Interview } from "../models/interview.model.js";
 import { Student } from "../models/student.model.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-const createStudent = asyncHandler(async (req, res) => {
+const registerStudent = asyncHandler(async (req, res) => {
   //check if user/employee is loggedIn and session is active
-  if (!req?.user) {
-    throw new apiError(401, "Unauthorized access!");
-  }
+  // if (!req?.user) {
+  //   throw new apiError(401, "Unauthorized access!");
+  // }
   //get student data from client
   const { batch, fullName, email, phone, college, courseScores } = req.body;
   //check all required fileds
@@ -50,10 +51,6 @@ const createStudent = asyncHandler(async (req, res) => {
 });
 
 const removeStudent = asyncHandler(async (req, res) => {
-  //check if client/employee is logged in
-  if (!req.user) {
-    throw new apiError(401, "Unauthorized access!");
-  }
   //get the data from client
   const { student_id } = req.query;
   //check data validation
@@ -62,13 +59,23 @@ const removeStudent = asyncHandler(async (req, res) => {
   }
   //find student and remove from db
   const student = await Student.findByIdAndDelete(student_id);
+  // const student = await Student.findById(student_id);
   if (!student) {
     throw new apiError(404, "Student not found!");
   }
+  //remove student from allocated interviews
+  student.interviewList.map(async (interview_id) => {
+    const interview = await Interview.findById(interview_id);
+    const newList = interview.studentList.filter(
+      (data) => data?._id === student._id
+    );
+    interview.studentList = [...newList];
+    await interview.save({ validateBeforeSave: false });
+  });
   //send response
   return res
     .status(200)
     .json(new apiResponse(200, {}, "Student removed successfully!"));
 });
 
-export { createStudent, removeStudent };
+export { registerStudent, removeStudent };
