@@ -23,10 +23,12 @@ app.use(cookieParser());
 // routes import
 
 import userRouter from "./routes/api/v1/user.route.js";
+import studentRouter from "./routes/api/v1/student.route.js";
 
 // routes declarations
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/students", studentRouter);
 
 // app.get("/", (req, res) => {
 //   res.send("Heyy I am working");

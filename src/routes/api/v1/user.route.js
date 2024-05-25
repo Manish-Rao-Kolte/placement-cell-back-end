@@ -7,15 +7,15 @@ import {
 } from "../../../controllers/user.controller.js";
 import { validateJwt } from "../../../middlewares/auth.middleware.js";
 
-const router = Router();
+const userRouter = Router();
 
 //unsecured routes
 // router.route("/register").post(registerUser);
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+userRouter.post("/register", registerUser);
+userRouter.post("/login", loginUser);
 
 //secured routes
-router.get("/logout", validateJwt, logoutUser);
-router.get("/refresh-token", refreshAccessToken);
+userRouter.get("/logout", validateJwt, logoutUser);
+userRouter.get("/refresh-token", refreshAccessToken);
 
-export default router;
+export default userRouter;

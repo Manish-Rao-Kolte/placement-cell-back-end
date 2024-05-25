@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const studentSchema = new Schema({
+  batch: {
+    type: String,
+    required: true,
+  },
   fullName: {
     type: String,
     required: true,
@@ -9,41 +13,40 @@ const studentSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    index: true,
+  },
+  phone: {
+    type: Number,
+    required: true,
+    unique: true,
   },
   college: {
     type: String,
     required: true,
   },
-  batch: {
+  status: {
     type: String,
-    required: true,
+    enum: ["placed", "not_placed"],
+    default: "not_placed",
   },
-  DSA: {
-    type: Number,
-    required: true,
+  courseScores: {
+    DSA: {
+      type: Number,
+      required: true,
+    },
+    WebD: {
+      type: Number,
+      required: true,
+    },
+    React: {
+      type: Number,
+      required: true,
+    },
   },
-  WebD: {
-    type: Number,
-    required: true,
-  },
-  React: {
-    type: Number,
-    required: true,
-  },
-  interviews: [
+  interviewList: [
     {
-      company: {
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
-      date: {
-        type: Date,
-        required: true,
-      },
-      result: {
-        type: String,
-        enum: ["PASS", "FAIL", "On Hold", "Didn’t Attempt"],
-      },
+      type: Schema.Types.ObjectId,
+      ref: "Interview",
     },
   ],
 });
