@@ -5,6 +5,20 @@ import { User } from "../models/user.model.js";
 import { cookieOptions } from "../constants.js";
 import jwt from "jsonwebtoken";
 
+const renderLoginPage = asyncHandler(async (req, res) => {
+  if (req.user) {
+    return res.redirect("/api/v1/");
+  }
+  return res.status(200).render("sign_in");
+});
+
+const renderSignupPage = asyncHandler(async (req, res) => {
+  if (req.user) {
+    return res.redirect("/api/v1/");
+  }
+  return res.status(200).render("sign_up");
+});
+
 //custome function to generate access and refresh token to increase reusability
 const generateAccessAndRefreshToken = async (user) => {
   try {
@@ -25,7 +39,7 @@ const generateAccessAndRefreshToken = async (user) => {
 const registerUser = asyncHandler(async (req, res) => {
   //get data from user/client
   //   console.log(req);
-  const { username, fullName, empId, email, password } = req.body;
+  const { email, username, fullName, empId, password } = req.body;
   //check if all required data is present
   if (
     [username, fullName, empId, email, password].some(
@@ -63,9 +77,8 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new apiError(500, "Something went wrong white registering user!");
   }
   //send response
-  return res
-    .status(201)
-    .json(new apiResponse(201, createdUser, "User registered successfully!"));
+  return res.status(201).redirect("/api/v1/");
+  // .json(new apiResponse(201, createdUser, "User registered successfully!"));
 });
 
 //create controller function to handle existing user login
@@ -110,17 +123,18 @@ const loginUser = asyncHandler(async (req, res) => {
     .status(201)
     .cookie("accessToken", accessToken, cookieOptions)
     .cookie("refreshToken", refreshToken, cookieOptions)
-    .json(
-      new apiResponse(
-        201,
-        {
-          user,
-          accessToken,
-          refreshToken,
-        },
-        "User logged in successfully!"
-      )
-    );
+    .redirect("/api/v1/");
+  // .json(
+  //   new apiResponse(
+  //     201,
+  //     {
+  //       user,
+  //       accessToken,
+  //       refreshToken,
+  //     },
+  //     "User logged in successfully!"
+  //   )
+  // );
 });
 
 //create controller function to handle existing user lgout
@@ -142,7 +156,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     .status(201)
     .clearCookie("accessToken", cookieOptions)
     .clearCookie("refreshToken", cookieOptions)
-    .json(new apiResponse(201, {}, "User logged out successfully!"));
+    .redirect("/api/v1/users/login-page");
+  // .json(new apiResponse(201, {}, "User logged out successfully!"));
 });
 
 //create funtion to handle token expiry
@@ -196,4 +211,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, logoutUser, refreshAccessToken };
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+  renderLoginPage,
+  renderSignupPage,
+};

@@ -1,6 +1,6 @@
-import { Student } from "../models/student.model";
-import { apiError } from "../utils/apiError";
-import { asyncHandler } from "../utils/asyncHandler";
+import { Student } from "../models/student.model.js";
+import { apiError } from "../utils/apiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const renderHome = asyncHandler(async (req, res) => {
   const studentList = await Student.find();
@@ -10,6 +10,7 @@ const renderHome = asyncHandler(async (req, res) => {
   /*
    Some work is pending here
   */
+  return res.status(200).render("home", { studentList });
 });
 
 export { renderHome };

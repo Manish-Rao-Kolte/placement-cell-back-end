@@ -78,4 +78,8 @@ const removeStudent = asyncHandler(async (req, res) => {
     .json(new apiResponse(200, {}, "Student removed successfully!"));
 });
 
-export { registerStudent, removeStudent };
+const renderAddStudent = asyncHandler(async (req, res) => {
+  return res.render("add_student", { loggedIn: true });
+});
+
+export { registerStudent, removeStudent, renderAddStudent };

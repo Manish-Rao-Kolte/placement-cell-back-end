@@ -4,6 +4,8 @@ import {
   loginUser,
   logoutUser,
   refreshAccessToken,
+  renderLoginPage,
+  renderSignupPage,
 } from "../../../controllers/user.controller.js";
 import { validateJwt } from "../../../middlewares/auth.middleware.js";
 
@@ -13,6 +15,8 @@ const userRouter = Router();
 // router.route("/register").post(registerUser);
 userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
+userRouter.get("/login-page", renderLoginPage);
+userRouter.get("/signup-page", renderSignupPage);
 
 //secured routes
 userRouter.get("/logout", validateJwt, logoutUser);
