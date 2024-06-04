@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport">
+    <title>Home</title>
+</head>
+<body>
+  <%- include ("navbar") %>
+      <ul role="list" class="divide-y divide-gray-100 mx-6 sm:mx-[18%]">
+        <% for(let company of companiesList) { %> 
+          <li class="flex-col sm:flex sm:flex-row justify-between gap-x-6 py-5 sm:px-6">
+            <div class="flex min-w-0 gap-x-6 sm:gap-x-20 items-center sm:w-[40%]">
+              <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://cdn-icons-png.flaticon.com/128/3985/3985222.png" alt="">
+              <div class="min-w-0 flex-auto">
+                <p class="text-sm font-semibold leading-6 text-gray-900 inline-flex sm:block"> <%=company.name %> </p>
+                <p class="sm:mt-1 truncate text-sm leading-6 text-gray-500 inline-flex sm:block sm:ml-0 ml-2"> <%=company.companyCode %> </p>
+              </div>
+            </div>
+            <div class=" hidden shrink-0 sm:flex sm:items-end sm:gap-x-4 justify-between sm:w-[30%]">
+              <div>
+                <p class="text-sm leading-6 text-gray-900"> Address- <%=company.address || "Not present" %> </p>
+                <p class="mt-1 text-xs leading-5 text-gray-500"> Phone- <%=company.phone || "Not present" %> </p>
+              </div>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+      <div class="flex items-center justify-center py-6">
+        <a href="add-company" class="bg-green-400 py-1 px-2 rounded-md text-sm flex text-center">Add Company</a>
+      </div>
+</body>
+</html>

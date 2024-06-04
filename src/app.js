@@ -7,15 +7,15 @@ app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
 app.use(
-  express.urlencoded({
-    extended: true,
-    limit: "16kb",
-  })
+   express.urlencoded({
+      extended: true,
+      limit: "16kb",
+   })
 );
 app.use(
-  express.json({
-    limit: "16kb",
-  })
+   express.json({
+      limit: "16kb",
+   })
 );
 app.use(express.static("public"));
 app.use(cookieParser());
@@ -31,9 +31,13 @@ import homeRouter from "./routes/api/v1/home.route.js";
 // routes declarations
 app.use("/api/v1/", homeRouter);
 app.use("/api/v1/users/", userRouter);
-app.use("/api/v1/students", studentRouter);
-app.use("/api/v1/interviews", interviewRouter);
-app.use("/api/v1/companies", companyRouter);
+app.use("/api/v1/students/", studentRouter);
+app.use("/api/v1/interviews/", interviewRouter);
+app.use("/api/v1/companies/", companyRouter);
+app.use("*", (req, res) => {
+   const url = req.baseUrl;
+   return res.status(404).render("404_page", { url });
+});
 
 // app.get("/", (req, res) => {
 //   res.send("Heyy I am working");

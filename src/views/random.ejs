@@ -1,0 +1,25 @@
+<ul role="list" class="divide-y divide-gray-100 mx-6 sm:mx-[18%]">
+    <% for(let student of studentList) { %> 
+      <li class="flex-col sm:flex sm:flex-row justify-between gap-x-6 py-5 sm:px-6">
+        <div class="flex min-w-0 gap-x-6 sm:gap-x-20 items-center sm:w-[40%]">
+          <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://cdn-icons-png.flaticon.com/128/15339/15339256.png" alt="">
+          <div class="min-w-0 flex-auto">
+            <p class="text-sm font-semibold leading-6 text-gray-900 inline-flex sm:block"> <%=student.fullName %> </p>
+            <p class="sm:mt-1 truncate text-sm leading-6 text-gray-500 inline-flex sm:block sm:ml-0 ml-2"> <%=student.email %> </p>
+            <p class="sm:mt-1 sm:hidden truncate text-sm leading-6 text-gray-900 inline-flex sm:ml-0 ml-2"> <%=student.status %> </p>
+          </div>
+        </div>
+        <div class=" hidden shrink-0 sm:flex sm:items-end sm:gap-x-4 justify-between sm:w-[30%]">
+          <div>
+            <p class="text-sm leading-6 text-gray-900"> Phone- <%=student.phone %> </p>
+            <p class="mt-1 text-xs leading-5 text-gray-500"> Batch- <%=student.batch %> </p>
+          </div>
+          <div>
+            <p class="text-sm leading-6 text-gray-900"> College- <%=student.college %> </p>
+            <p class="mt-1 text-xs leading-5 text-gray-500"> Status- <%=student.status %> </p>
+          </div>
+        </div>
+      </li>
+    <% } %>
+  </ul>
+  <!-- list data -->

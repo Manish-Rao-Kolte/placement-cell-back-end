@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
-  registerUser,
-  loginUser,
-  logoutUser,
-  refreshAccessToken,
-  renderLoginPage,
-  renderSignupPage,
+   registerUser,
+   loginUser,
+   logoutUser,
+   refreshAccessToken,
+   renderLoginPage,
+   renderSignupPage,
 } from "../../../controllers/user.controller.js";
 import { validateJwt } from "../../../middlewares/auth.middleware.js";
 

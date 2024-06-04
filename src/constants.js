@@ -1,7 +1,9 @@
 const DB_Name = "placement_cell";
 const cookieOptions = {
-  httpOnly: true,
-  secure: true,
+   httpOnly: true,
+   secure: true,
 };
 
-export { DB_Name, cookieOptions };
+const resultList = ["PASS", "FAIL", "On Hold", "Did not Attempt", "Scheduled"];
+
+export { DB_Name, cookieOptions, resultList };
