@@ -3,13 +3,13 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 const app = express();
-app.use(
-   cors({
-      origin: "*",
-      methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-      credentials: true,
-   })
-);
+const corsConfig = {
+   origin: "*",
+   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+   credentials: true,
+};
+app.options("*", cors(corsConfig));
+app.use(cors(corsConfig));
 
 app.set("view engine", "ejs");
 app.set("views", "src/views");
