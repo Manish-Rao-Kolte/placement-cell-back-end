@@ -10,10 +10,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body style="font-family: 'Poppins', sans-serif; font-weight: 400; font-style: normal;">
-  <nav class="bg-gray-800 sm:px-6">
+  <nav class="bg-gray-800 sm:px-6 min-h-[5vh] md:h-[5.5vh] lg:h-[7vh]">
     <div class="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
-        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
           <!-- Mobile menu button-->
           <button id="menu-button" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
             <span class="absolute -inset-0.5"></span>
@@ -35,16 +35,17 @@
             </svg> -->
           </button>
         </div>
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
           <div class="flex flex-shrink-0 items-center">
             <img class="h-8 w-auto" src="/images/coding_ninja_logo.png" alt="Your Company">
           </div>
-          <div class="hidden sm:ml-6 sm:block">
+          <div class="hidden md:ml-6 md:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="/api/v1/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
               <a href="/api/v1/companies/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Companies</a>
               <a href="/api/v1/interviews/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Interviews</a>
+              <a href="/api/v1/generate-csv" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Download CSV</a>
             </div>
           </div>
         </div>
@@ -66,12 +67,13 @@
     </div>
   
     <!-- Mobile menu, show/hide based on menu state using js -->
-    <div class="sm:hidden hidden" id="mobile-menu">
+    <div class="md:hidden hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> 
         <a href="/api/v1/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium focus:bg-gray-900 focus:text-white menu-option">Home</a>
         <a href="/api/v1/companies/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium focus:bg-gray-900 focus:text-white menu-option">Companies</a>
         <a href="/api/v1/interviews/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium focus:bg-gray-900 focus:text-white menu-option">Interviews</a>
+        <a href="/api/v1/generate-csv" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium focus:bg-gray-900 focus:text-white menu-option">Download CSV</a>
       </div>
     </div>
   </nav>
@@ -80,14 +82,13 @@
     const menuBtnEl = document.getElementById("menu-button");
     const menuEl = document.getElementById("mobile-menu");
     menuBtnEl.addEventListener("click", () => {
-      menuEl.classList.remove("hidden");
+      if(menuEl.classList.contains("hidden")){
+        menuEl.classList.remove("hidden");
+      }else{
+        menuEl.classList.add("hidden");
+      }
+      
     })
-    // const menuOptionList = document.getElementsByClassName("menu-option");
-    // for (let ele of menuOptionList){
-    //   ele.addEventListener("click", () => {
-    //     menuEl.classList.add("hidden");
-    //   })
-    // }
   </script>
 </body>
 </html>

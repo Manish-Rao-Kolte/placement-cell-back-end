@@ -1,5 +1,6 @@
-<%- include("navbar") %>
-<div class="flex max-h-full flex-col align-center px-14 py-28 lg:px-8">
+<div class="h-full bg-[url('/images/main_bg_image.jpg')] bg-cover">
+  <%- include("navbar") %>
+  <div class="flex max-h-full flex-col align-center px-14 py-28 lg:px-8">
     <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Schedule an Interview</h2>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6 " action="/api/v1/interviews/schedule" method="POST">
@@ -39,3 +40,4 @@
       </form>
     </div>
   </div>
+</div>
