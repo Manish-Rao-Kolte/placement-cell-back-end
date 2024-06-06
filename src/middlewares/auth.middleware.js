@@ -10,6 +10,7 @@ export const validateJwt = asyncHandler(async (req, res, next) => {
          req.cookies?.accessToken ||
          req.header("Authorization")?.replace("Bearer ", "");
       if (!token) {
+         console.log("working");
          return res.status(401).redirect("/api/v1/users/login-page");
       }
       const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
