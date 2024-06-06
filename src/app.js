@@ -31,6 +31,7 @@ import companyRouter from "./routes/api/v1/company.route.js";
 import homeRouter from "./routes/api/v1/home.route.js";
 
 // routes declarations
+app.use("/", homeRouter);
 app.use("/api/v1/", homeRouter);
 app.use("/api/v1/users/", userRouter);
 app.use("/api/v1/students/", studentRouter);
