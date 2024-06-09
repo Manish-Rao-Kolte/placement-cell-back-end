@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-   generateCSV,
-   renderHome,
+      generateCSV,
+      renderHome,
 } from "../../../controllers/home.controller.js";
 import { validateJwt } from "../../../middlewares/auth.middleware.js";
 

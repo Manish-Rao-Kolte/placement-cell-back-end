@@ -74,10 +74,10 @@ const generateCSV = asyncHandler(async (req, res) => {
             )
             .select("-createdAt -updatedAt");
       const data = [];
-      studentList.forEach((student) => {
-            const obj = {};
+      for await (let student of studentList) {
+            let obj = {};
             if (student.interviewList.length > 0) {
-                  student.interviewList.forEach((interview) => {
+                  for await (let interview of student.interviewList) {
                         obj["Student Id"] = student._id;
                         obj["Student Name"] = student.fullName;
                         obj["Student Email"] = student.email;
@@ -92,7 +92,8 @@ const generateCSV = asyncHandler(async (req, res) => {
                         obj["Interview Company"] = interview.companyName;
                         obj["Interview Result"] = interview.result;
                         data.push(obj);
-                  });
+                        obj = {};
+                  }
             } else {
                   obj["Student Id"] = student._id;
                   obj["Student Name"] = student.fullName;
@@ -109,15 +110,8 @@ const generateCSV = asyncHandler(async (req, res) => {
                   obj["Interview Result"] = "";
                   data.push(obj);
             }
-            // obj["Name"] = student.fullName;
-            // obj["Email"] = student.email;
-            // obj["Phone"] = student.phone;
-            // obj["Batch"] = student.batch;
-            // obj["College"] = student.college;
-            // obj["Status"] = student.status;
-            // obj["Scores"] = student.courseScores;
-            // obj["Interviews"] = Object.assign({}, student.interviewList);
-      });
+      }
+
       //generate csv from data
       try {
             const parser = new Parser();
@@ -126,8 +120,8 @@ const generateCSV = asyncHandler(async (req, res) => {
                   if (err) {
                         return console.log(err);
                   }
+                  return res.status(201).download("./src/output/data.csv");
             });
-            return res.status(201).download("./src/output/data.csv");
       } catch (err) {
             throw new apiError(500, err);
       }

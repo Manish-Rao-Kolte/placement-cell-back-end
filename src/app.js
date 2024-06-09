@@ -4,9 +4,9 @@ import cors from "cors";
 
 const app = express();
 const corsConfig = {
-   origin: "*",
-   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-   credentials: true,
+      origin: "*",
+      methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+      credentials: true,
 };
 app.options("*", cors(corsConfig));
 
@@ -15,15 +15,15 @@ app.set("views", "src/views");
 
 app.use(cors(corsConfig));
 app.use(
-   express.urlencoded({
-      extended: true,
-      limit: "16kb",
-   })
+      express.urlencoded({
+            extended: true,
+            limit: "16kb",
+      })
 );
 app.use(
-   express.json({
-      limit: "16kb",
-   })
+      express.json({
+            limit: "16kb",
+      })
 );
 app.use(express.static("public"));
 app.use(cookieParser());
@@ -43,8 +43,8 @@ app.use("/api/v1/students/", studentRouter);
 app.use("/api/v1/interviews/", interviewRouter);
 app.use("/api/v1/companies/", companyRouter);
 app.use("*", (req, res) => {
-   const url = req.baseUrl;
-   return res.status(404).render("404_page", { url });
+      const url = req.baseUrl;
+      return res.status(404).render("404_page", { url });
 });
 
 // app.get("/", (req, res) => {
