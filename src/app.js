@@ -9,11 +9,11 @@ const corsConfig = {
    credentials: true,
 };
 app.options("*", cors(corsConfig));
-app.use(cors(corsConfig));
 
 app.set("view engine", "ejs");
 app.set("views", "src/views");
 
+app.use(cors(corsConfig));
 app.use(
    express.urlencoded({
       extended: true,
